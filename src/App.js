@@ -62,7 +62,7 @@ function App() {
             </p>
           )}
         </div>
-        <div className="mt-4">
+        <div className={`mt-4 transition ${webhookData ? "" : "grayscale brightness-75 pointer-events-none select-none"}`}>
           <p className="font-bold text-xl">Goodies</p>
           <p>Read about these features <Link href={repo + "#goodies"}>in detail</Link></p>
           <ul className="space-y-0.5 mt-1">
