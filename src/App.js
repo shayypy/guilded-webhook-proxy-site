@@ -8,6 +8,7 @@ function App() {
   const origin = "https://guilded.shayy.workers.dev";
   const repo = "https://github.com/shayypy/guilded-webhook-proxy";
   const [webhookData, setWebhookData] = useState();
+  const [webhookError, setWebhookError] = useState();
   const [url, setUrl] = useState(origin);
   const [query, updateQuery] = useReducer((d, partialD) => ({ ...d, ...partialD }), {});
 
@@ -33,14 +34,18 @@ function App() {
               className="bg-guilded-slate w-full p-2 rounded text-guilded-subtitle focus:text-guilded-white transition"
               placeholder="https://media.guilded.gg/webhooks/..."
               onInput={(e) => {
+                setWebhookError(undefined);
+                if (!e.currentTarget.value) return;
+
                 const match = e.currentTarget.value.match(WEBHOOK_URL_REGEX);
                 if (match) {
                   setWebhookData({
                     id: match[1],
                     token: match[2],
-                  })
+                  });
                 } else {
                   setWebhookData(undefined);
+                  setWebhookError(<>Invalid webhook URL. Press "Copy URL" in the Guilded webhooks menu and then paste here. <Link href="https://support.guilded.gg/hc/en-us/articles/360038927934">Click here</Link> for instructions on creating a webhook.</>);
                 }
               }}
             />
@@ -57,9 +62,15 @@ function App() {
               </label>
             </div>
           ) : (
-            <p className="text-sm text-guilded-subtitle">
-              Input a valid webhook URL above to get a replacement URL for GitHub.
-            </p>
+            <div>
+              <p className="text-sm text-guilded-subtitle">
+                {webhookError ? (
+                  <span className="text-red-400">{webhookError}</span>
+                ) : (
+                  <span>Input a valid webhook URL above to get a replacement URL for GitHub.</span>
+                )}
+              </p>
+            </div>
           )}
         </div>
         <div className={`mt-4 transition ${webhookData ? "" : "grayscale brightness-75 pointer-events-none select-none"}`}>
