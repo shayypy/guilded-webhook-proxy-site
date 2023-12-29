@@ -1,6 +1,6 @@
 import { useEffect, useReducer, useState } from "react";
 
-const WEBHOOK_URL_REGEX = /^https:\/\/media\.guilded\.gg\/webhooks\/([\w-]+)\/([^ ]+)/;
+const WEBHOOK_URL_REGEX = /^https:\/\/media\.guilded\.gg\/webhooks\/([\w-]+)\/([^/ ]+)$/;
 
 const Link = ({ href, children }) => <a className="text-guilded-link hover:text-guilded-white transition" href={href}>{children}</a>
 
