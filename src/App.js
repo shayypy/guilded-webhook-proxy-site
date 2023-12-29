@@ -17,7 +17,7 @@ function App() {
   }, [query, webhookData]);
 
   return (
-    <div className="bg-guilded-gray text-guilded-white flex h-screen overflow-auto">
+    <div className="text-guilded-white flex">
       <div className="max-w-4xl p-8 mx-auto w-full">
         <h1 className="font-bold text-2xl">Guilded Webhook Proxy URL Generator</h1>
         Hello! This is a simple URL generator for my Guilded webhook proxy.
