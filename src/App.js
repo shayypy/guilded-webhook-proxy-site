@@ -121,6 +121,35 @@ function App() {
                 </select>
               </label>
             </li>
+            <li>
+              <label>
+                <input
+                  type="checkbox"
+                  onChange={(e) => updateQuery({ branded: String(e.currentTarget.checked) })} ß
+                  defaultChecked
+                />{" "}
+                Use GitHub-branded webhook profile
+              </label>
+            </li>
+            <li>
+              <input
+                className="px-2 py-1 align-middle bg-guilded-slate rounded"
+                placeholder="Custom webhook username"
+                maxLength={128}
+                onChange={(e) => {
+                  updateQuery({ username: e.currentTarget.value.trim() || undefined });
+                }}
+              />
+            </li>
+            <li>
+              <input
+                className="px-2 py-1 align-middle bg-guilded-slate rounded"
+                placeholder="Custom webhook avatar URL"
+                onChange={(e) => {
+                  updateQuery({ avatarUrl: e.currentTarget.value.trim() || undefined });
+                }}
+              />
+            </li>
           </ul>
         </div>
       </div>
