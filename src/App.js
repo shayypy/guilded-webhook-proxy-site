@@ -10,7 +10,15 @@ function App() {
   const [webhookData, setWebhookData] = useState();
   const [webhookError, setWebhookError] = useState();
   const [url, setUrl] = useState(origin);
-  const [query, updateQuery] = useReducer((d, partialD) => ({ ...d, ...partialD }), {});
+  const [query, updateQuery] = useReducer((d, partialD) => {
+    const newQuery = { ...d, ...partialD };
+    for (const [key, value] of Object.entries(newQuery)) {
+      if (value === undefined) {
+        delete newQuery[key];
+      }
+    }
+    return newQuery;
+  }, {});
 
   useEffect(() => {
     setUrl(origin + (webhookData ? `/webhooks/${webhookData.id}/${webhookData.token}` : "") + (Object.keys(query).length === 0 ? "" : ("?" + new URLSearchParams(query).toString())));
@@ -104,7 +112,7 @@ function App() {
                   className="px-2 py-1 align-middle bg-guilded-slate rounded"
                   onChange={(e) => {
                     const val = e.currentTarget.selectedOptions[0].value;
-                    updateQuery({ immersive: val });
+                    updateQuery({ immersive: val || undefined});
                   }}
                 >
                   <option value="">Disabled</option>
