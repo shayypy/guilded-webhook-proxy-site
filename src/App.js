@@ -5,7 +5,7 @@ const WEBHOOK_URL_REGEX = /^https:\/\/media\.guilded\.gg\/webhooks\/([\w-]+)\/([
 const Link = ({ href, children }) => <a className="text-guilded-link hover:text-guilded-white transition" href={href}>{children}</a>
 
 function App() {
-  const origin = "https://guilded.shayy.workers.dev";
+  const origin = "https://guilded.shayy.workers.dev/webhooks";
   const repo = "https://github.com/shayypy/guilded-webhook-proxy";
   const [webhookData, setWebhookData] = useState();
   const [webhookError, setWebhookError] = useState();
