@@ -5,7 +5,7 @@ const WEBHOOK_URL_REGEX = /^https:\/\/media\.guilded\.gg\/webhooks\/([\w-]+)\/([
 const Link = ({ href, children }) => <a className="text-guilded-link hover:text-guilded-white transition" href={href}>{children}</a>
 
 function App() {
-  const origin = "https://guilded.shayy.workers.dev/webhooks";
+  const origin = "https://guilded.shayy.workers.dev";
   const repo = "https://github.com/shayypy/guilded-webhook-proxy";
   const [webhookData, setWebhookData] = useState();
   const [webhookError, setWebhookError] = useState();
@@ -13,7 +13,7 @@ function App() {
   const [query, updateQuery] = useReducer((d, partialD) => ({ ...d, ...partialD }), {});
 
   useEffect(() => {
-    setUrl(origin + (webhookData ? `/${webhookData.id}/${webhookData.token}` : "") + (Object.keys(query).length === 0 ? "" : ("?" + new URLSearchParams(query).toString())));
+    setUrl(origin + (webhookData ? `/webhooks/${webhookData.id}/${webhookData.token}` : "") + (Object.keys(query).length === 0 ? "" : ("?" + new URLSearchParams(query).toString())));
   }, [query, webhookData]);
 
   return (
