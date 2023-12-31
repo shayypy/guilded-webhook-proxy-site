@@ -13,7 +13,7 @@ function App() {
   const [query, updateQuery] = useReducer((d, partialD) => ({ ...d, ...partialD }), {});
 
   useEffect(() => {
-    setUrl(origin + (webhookData ? `/${webhookData.id}/${webhookData.token}` : "") + (Object.keys(query).length === 0 ? "" : ("?" + new URLSearchParams(query).toString())));
+    setUrl(origin + (webhookData ? `/webhooks/${webhookData.id}/${webhookData.token}` : "") + (Object.keys(query).length === 0 ? "" : ("?" + new URLSearchParams(query).toString())));
   }, [query, webhookData]);
 
   return (
